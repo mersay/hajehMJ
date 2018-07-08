@@ -8,3 +8,6 @@ v0.2
 
 features under development
 - detailed record for each player
+- UI improvements (pixels on pictures)
+- app icon
+- clean up styles
