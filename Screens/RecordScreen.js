@@ -2,7 +2,7 @@
  * Created by MercedesLo on 2018-07-07.
  */
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, VirtualizedList, FlatList, Dimensions } from 'react-native';
 
 
 export default class RecordScreen extends React.Component {
@@ -22,14 +22,14 @@ export default class RecordScreen extends React.Component {
     }
   }
 
-  renderItem(transaction) {
-    console.log("tra", transaction)
-    let winnerName = this.state.players.filter((player) => player.id == transaction.winners[0])
+  renderItem(item) {
+    let transaction = item
+    let winnerName = this.state.players.filter((player) => player.id == transaction.winners[0]).map((player) => player.name)
     if (transaction.mode == 0) {
-      return <View key={transaction.transID} ><Text>{winnerName} 自摸 {transaction.score} 番</Text></View>
+      return (<View style={styles.entry} key={transaction.transID}><Text>{winnerName} 自摸 {transaction.score} 番</Text></View>)
     } else {
-      let loserName = this.state.players.filter((player) => player.id == transaction.losers[0]);
-      return <View key={transaction.transID} ><Text>{loserName} 出銃俾 {winnerName} {transaction.score} 番</Text></View>
+      let loserName = this.state.players.filter((player) => player.id == transaction.losers[0]).map((player) => player.name)
+      return (<View style={styles.entry} key={transaction.transID}><Text>{loserName} 出銃俾 {winnerName} {transaction.score.toString()} 番</Text></View>)
     }
   }
 
@@ -37,8 +37,9 @@ export default class RecordScreen extends React.Component {
     return (
       <View>
         <FlatList
+          style={{marginTop: 30}}
           data={this.state.transactions}
-          keyExtractor={(item, index) => item.key}
+          keyExtractor={(item, index) => item.transID}
           renderItem={({item}) => this.renderItem(item)}
         />
       </View>
@@ -66,8 +67,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  title: {
-    alignSelf: 'center',
+  entry: {
+    alignItems: 'center'
   }
 });
 
