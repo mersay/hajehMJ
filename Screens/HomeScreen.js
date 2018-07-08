@@ -26,7 +26,7 @@ export default class HomeScreen extends React.Component {
               {name: 'Virginia', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
               {name: 'Player 3', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
               {name: 'Player 4', score: 0, pay: 0, id: uuid(), active: true, deleted: false}],
-      transactions : [{2: -8, 3: 8}, {0: -24, 1:-24, 2: -24, 3: 72}],
+      transactions : [],
       newPlayerName : 'New Player'
     }
   }
@@ -39,7 +39,6 @@ export default class HomeScreen extends React.Component {
     let transID = state.transID
 
     if (transaction) {
-      console.log("transaction.entry", transaction.entry)
       if (transaction.transID == state.transID) return null;
       result = calculate(transaction, state)
       newTransactions.push(result.entry)
@@ -141,8 +140,8 @@ export default class HomeScreen extends React.Component {
 
 
   render() {
-    const {transactions, stats} = this.state
-    const players = stats.filter((player) => !player.deleted).sort((a,b) => b.pay - a.pay);
+    let {transactions, stats} = this.state
+    let players = stats.filter((player) => !player.deleted).sort((a,b) => b.pay - a.pay);
     return (
       <View style={{flex:1}}>
         <ScrollView>
@@ -160,17 +159,17 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Step0', {players})}>
               <Image style={{}} source={require('../assets/images/eat2Size.png')}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Record', {players, transactions})} title="出銃記錄">
-              <Image  source={require('../assets/images/transactionSize.png')}/>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Record', {players: this.state.stats, transactions})} title="出銃記錄">
+              <Image source={require('../assets/images/transactionSize.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => this.setResetModalVisible(!this.state.resetModalVisible)} title="重置">
-              <Image   source={require('../assets/images/resetSize.png')}/>
+              <Image source={require('../assets/images/resetSize.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => this.setAddPlayerModalVisible(!this.state.addPlayerModalVisible)} title="增加玩家">
-              <Image  style={{}} source={require('../assets/images/addSize.png')}/>
+              <Image style={{}} source={require('../assets/images/addSize.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => this.setEditPlayerModalVisible(!this.state.editPlayerModalVisible)} title="改變玩家名稱/移除玩家">
-              <Image  style={{resizeMode: 'contain', width: Dimensions.get('window').width * 0.85}} source={require('../assets/images/changeSize.png')}/>
+              <Image style={{resizeMode: 'contain', width: Dimensions.get('window').width * 0.85}} source={require('../assets/images/changeSize.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Rules')} title="番數表">
               <Image style={{resizeMode: 'contain',}} source={require('../assets/images/chartSize.png')}/>

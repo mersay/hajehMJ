@@ -14,12 +14,13 @@ export default class Step3bScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
+    const players = props.navigation.state.params.transaction.players
+    // doing this because we need random player id when we render
     this.state = {
-      score1: 1,
-      score2: 1,
-      winner1: 0,
-      winner2: 0,
+      score1: 3,
+      score2: 3,
+      winner1: players[0].id,
+      winner2: players[0].id,
       transID: null,
       twoWinners: false,
     }
@@ -44,7 +45,7 @@ export default class Step3bScreen extends React.Component {
   render() {
     const {navigation} = this.props;
     const transaction = navigation.getParam('transaction')
-    const players = transaction.players.filter((player) => player.id != transaction.loser)
+    const leftPlayers = transaction.players.filter((player) => player.id != transaction.losers[0])
     return (
       <View style={styles.center}>
         <View>
@@ -52,14 +53,12 @@ export default class Step3bScreen extends React.Component {
           <Picker selectedValue={this.state.winner1}
                   style={Platform.OS == 'ios'? styles.iosPicker: styles.androidPicker}
                   onValueChange={(itemValue, itemIndex) => this.setState({winner1: itemValue})}>
-          {players.map((player ,id) => <Picker.Item key={id} label={player.name} value={player.id} onPress={() => this.setWinner(player.id, 1)}/>)}
+          {leftPlayers.map((player,id) => <Picker.Item key={id} label={player.name} value={player.id}/>)}
           </Picker>
         </View>
         <View style={Platform.OS === 'ios'? {marginTop: 150}: {marginTop: 50}}>
           <Image style={{resizeMode: 'contain', marginBottom: 10}} source={require('../assets/images/howmanySize.png')}/>
           <Picker selectedValue={this.state.score1} style={Platform.OS == 'ios'? styles.iosPicker: styles.androidPicker} onValueChange={(itemValue, itemIndex) => this.setState({score1: itemValue})}>
-            <Picker.Item label={"1"} value={1} />
-            <Picker.Item label={"2"} value={2} />
             <Picker.Item label={"3"} value={3} />
             <Picker.Item label={"4"} value={4} />
             <Picker.Item label={"5"} value={5} />
@@ -104,7 +103,7 @@ export default class Step3bScreen extends React.Component {
         <View style={[styles.row, {marginTop: 180, justifyContent: 'center'}]}>
           <TouchableOpacity onPress={() => navigation.navigate('Home',
             {transaction : {...transaction,
-              twoWinners: this.state.twoWinners,
+              //twoWinners: this.state.twoWinners,
               transID: this.state.transID,
               winners: [this.state.winner1], //, this.state.winner2],
               score: this.state.score1 }})}> // there was this.state.score2 in an array too

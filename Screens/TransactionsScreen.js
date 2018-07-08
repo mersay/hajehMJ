@@ -8,7 +8,7 @@ import { StyleSheet, Text, View, Button, ListView, Dimensions } from 'react-nati
 
 export default class TransactionScreen extends React.Component {
   static navigationOptions = {
-    title: '出銃記錄',
+    title: '出銃錄',
   }
 
   constructor(props) {
@@ -22,8 +22,6 @@ export default class TransactionScreen extends React.Component {
       </View>
     )
   }
-
-  //TODO: only show active players/ OR all ? filter
 
   render() {
     const { navigation } = this.props;

@@ -38,9 +38,8 @@ export default function calculate (transaction, state, wins) {
       let loserProfile = players.filter((player) => player.id == loser)[0]
       loserProfile.score -= transaction.score
       loserProfile.pay -= scale[transaction.score].oneLose
-      entry[loser] = -transaction.score
     }
   }
 
-  return {stats: players, entry};
+  return {stats: players, entry: transaction};
 }

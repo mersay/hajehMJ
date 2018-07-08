@@ -20,7 +20,6 @@ export default class Step3aScreen extends React.Component {
     }
   }
 
-
   componentDidMount() {
     this.setState({transID: uuidv4()})
   }
@@ -36,8 +35,6 @@ export default class Step3aScreen extends React.Component {
             selectedValue={this.state.score}
             style={Platform.OS == 'ios'? styles.iosPicker: styles.androidPicker}
             onValueChange={(itemValue, itemIndex) => this.setState({score: itemValue})}>
-            <Picker.Item label={"1"} value={1} />
-            <Picker.Item label={"2"} value={2} />
             <Picker.Item label={"3"} value={3} />
             <Picker.Item label={"4"} value={4} />
             <Picker.Item label={"5"} value={5} />
@@ -70,7 +67,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 30,
   },
-  iosPicker: { height: 50, width: 300, marginBottom: 200},
+  iosPicker: {
+    height: 50,
+    width: 300,
+    marginBottom: 200
+  },
   androidPicker: {
 
   },

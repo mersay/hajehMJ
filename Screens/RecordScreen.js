@@ -2,7 +2,7 @@
  * Created by MercedesLo on 2018-07-07.
  */
 import React from 'react';
-import { StyleSheet, Text, View, Button, ListView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 
 
 export default class RecordScreen extends React.Component {
@@ -12,39 +12,36 @@ export default class RecordScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    const { navigation } = props;
+    let players = navigation.getParam('players')// .filter((item) => item.active).sort((a,b) => a.id - b.id);
+    let transactions = navigation.getParam('transactions', [])
+    console.log("trans", transactions)
+    this.state = {
+      players,
+      transactions
+    }
   }
 
-  renderRow(rowData) {
-    return (
-      <View style={styles.row}>
-        {rowData.map((data, id) => <View key={id} style={{width: Dimensions.get('window').width * 0.1}}><Text>{data}</Text></View>)}
-      </View>
-    )
+  renderItem(transaction) {
+    console.log("tra", transaction)
+    let winnerName = this.state.players.filter((player) => player.id == transaction.winners[0])
+    if (transaction.mode == 0) {
+      return <View key={transaction.transID} ><Text>{winnerName} 自摸 {transaction.score} 番</Text></View>
+    } else {
+      let loserName = this.state.players.filter((player) => player.id == transaction.losers[0]);
+      return <View key={transaction.transID} ><Text>{loserName} 出銃俾 {winnerName} {transaction.score} 番</Text></View>
+    }
   }
 
   render() {
-    const { navigation } = this.props;
-    let players = navigation.getParam('players')// .filter((item) => item.active).sort((a,b) => a.id - b.id);
-    let transactions =  navigation.getParam('transactions', [])
-    let results = []
-    for (let transaction of transactions) {
-      let entry = []
-      for (let player of players) {
-        entry[player.id] = transaction[player.id]? transaction[player.id] : 0
-      }
-      results.push(entry)
-    }
-    let names = players.map((player) => player.name) //order by id
-    let finalRecord = [names].concat(results)
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let data = ds.cloneWithRows(finalRecord)
-
     return (
-      <ListView
-        style= {styles.center}
-        dataSource={data}
-        renderRow={(rowData) => this.renderRow(rowData)}
-      />
+      <View>
+        <FlatList
+          data={this.state.transactions}
+          keyExtractor={(item, index) => item.key}
+          renderItem={({item}) => this.renderItem(item)}
+        />
+      </View>
     );
   }
 
