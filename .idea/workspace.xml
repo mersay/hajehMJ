@@ -70,20 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Step2aScreen.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Screens/Step2aScreen.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
-              <folding>
-                <element signature="e#49#75#0" expanded="true" />
-                <element signature="e#1537#1584#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecordScreen.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RecordScreen.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Screens/RecordScreen.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -92,6 +79,16 @@
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#48#74#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,7 +161,6 @@
         <option value="$PROJECT_DIR$/Screens/Step0Screen.js" />
         <option value="$PROJECT_DIR$/Screens/Step2aScreen.js" />
         <option value="$PROJECT_DIR$/Screens/Step2bScreen.js" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Screens/Step3aScreen.js" />
         <option value="$PROJECT_DIR$/calculation.js" />
         <option value="$PROJECT_DIR$/Screens/TransactionsScreen.js" />
@@ -172,6 +168,7 @@
         <option value="$PROJECT_DIR$/Screens/Step3bScreen.js" />
         <option value="$PROJECT_DIR$/Screens/AboutScreen.js" />
         <option value="$PROJECT_DIR$/Screens/RecordScreen.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -389,12 +386,12 @@
       <workItem from="1528522639551" duration="33000" />
       <workItem from="1529888614084" duration="17036000" />
       <workItem from="1530139747465" duration="13088000" />
-      <workItem from="1530999387166" duration="17771000" />
+      <workItem from="1530999387166" duration="18055000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91429000" />
+    <option name="totallyTimeSpent" value="91713000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="8" y="23" width="1425" height="807" extended-state="0" />
@@ -778,14 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -915,6 +904,14 @@
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#48#74#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
