@@ -7,12 +7,16 @@ import { StyleSheet, Text, View, TouchableOpacity, ListView, Image } from 'react
 
 export default class Step2bScreen extends React.Component {
   static navigationOptions = {
-    title: '出銃(2A)',
+    title: '出銃 (2b)',
   }
 
   constructor(props) {
     super(props);
 
+  }
+
+  filterLosers(players, id) {
+    return players.filter((player) => player.id != id)
   }
 
   render() {
@@ -24,7 +28,7 @@ export default class Step2bScreen extends React.Component {
         {players.map((player ,id) => <TouchableOpacity key={id}
                                               style={{marginVertical:5}}
                                               value={player.id}
-                                              onPress={() => navigation.navigate('Step3b', {transaction: {mode: 1, loser: player.id, players}})}>
+                                              onPress={() => navigation.navigate('Step3b', {transaction: {mode: 1, losers: [player.id], players: this.filterLosers(players, player.id)}})}>
           <Text style={styles.text}>{player.name}</Text>
         </TouchableOpacity>)}
 
@@ -57,6 +61,5 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',
   }
-});/**
- * Created by MercedesLo on 2018-06-03.
- */
+});
+

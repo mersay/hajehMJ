@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { StyleSheet, Text, View, Platform, Button, Modal, TextInput, Picker, PickerItem, Alert, TouchableOpacity, Image, Dimensions, ImageBackground, ScrollView } from 'react-native';
-
+const uuid = require('uuid/v4');
 import calculate from '../calculation'
 export default class HomeScreen extends React.Component {
 
@@ -22,16 +22,14 @@ export default class HomeScreen extends React.Component {
       addPlayerModalVisible: false,
       editPlayerModalVisible: false,
       settingsModalVisible: false,
-      stats: [{name: 'Roberto', score:0, pay: 0 ,id : 0, active: true},
-              {name: 'Virginia', score:0, pay:-123 , id :1, active: true },
-              {name: 'Player 3', score: 0 , pay:0, id:2, active: true },
-              {name: 'Player 4', score:0, pay: 0, id:3, active: true}],
+      stats: [{name: 'Roberto', score: 0, pay: 0, id: uuid(), active: true, deleted: false},
+              {name: 'Virginia', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
+              {name: 'Player 3', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
+              {name: 'Player 4', score: 0, pay: 0, id: uuid(), active: true, deleted: false}],
       transactions : [{2: -8, 3: 8}, {0: -24, 1:-24, 2: -24, 3: 72}],
       newPlayerName : 'New Player'
     }
   }
-
-
 
   static getDerivedStateFromProps(props, state) {
     const {navigation} = props;
@@ -41,6 +39,7 @@ export default class HomeScreen extends React.Component {
     let transID = state.transID
 
     if (transaction) {
+      console.log("transaction.entry", transaction.entry)
       if (transaction.transID == state.transID) return null;
       result = calculate(transaction, state)
       newTransactions.push(result.entry)
@@ -88,7 +87,7 @@ export default class HomeScreen extends React.Component {
       )
       return;
     }
-    let id = this.state.stats.length + 1  //consider using uuid
+    let id = uuid()
     let newPlayerProfile = {name: this.state.newPlayerName, pay: 0, score: 0, id, active: true}
 
     let newStats = this.state.stats.concat(newPlayerProfile)
@@ -99,8 +98,24 @@ export default class HomeScreen extends React.Component {
   }
 
   removePlayer(id) {
-    let newPlayers = this.state.stats.map((item) => item.id == id? {...item, active: false} : item)
-    this.setState({stats: newPlayers})
+    //TODO: what to do when delete this player?
+    Alert.alert(
+      'Error',
+      '刪除此玩家不會刪除之前已有的牌局紀錄，確定移除玩家?',
+      [
+        {text: '確定刪除', onPress: () => {
+            let newPlayers = this.state.stats.map((item) => item.id == id? {...item, deleted: true} : item)
+            this.setState({stats: newPlayers})
+          },
+        },
+        {text: '取消', onPress: () => {
+            return
+          },
+        }
+
+      ],
+      { cancelable: true }
+    )
   }
 
 
@@ -127,7 +142,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const {transactions, stats} = this.state
-    const players = stats.filter((item) => item.active)
+    const players = stats.filter((player) => !player.deleted).sort((a,b) => b.pay - a.pay);
     return (
       <View style={{flex:1}}>
         <ScrollView>
@@ -139,13 +154,13 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <View style={[styles.center, {marginBottom: 30}]}>
-              {players.map((player,id) => <Text key={id} style={styles.text}>{player.name}: {player.score}番  {player.pay >=0 ? "贏" : "輸"} {player.pay} = ${player.pay * this.state.blind}</Text>)}
+              {players.map((player,id) => <Text key={id} style={styles.text}>{player.name}: {player.score}番 {player.pay >=0 ? "贏" : "輸"} {Math.abs(player.pay)} = ${player.pay * this.state.blind}</Text>)}
             </View>
           <View>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Step1', {players})}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Step0', {players})}>
               <Image style={{}} source={require('../assets/images/eat2Size.png')}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Transactions', {players, transactions})} title="出銃記錄">
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Record', {players, transactions})} title="出銃記錄">
               <Image  source={require('../assets/images/transactionSize.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => this.setResetModalVisible(!this.state.resetModalVisible)} title="重置">
@@ -184,7 +199,7 @@ export default class HomeScreen extends React.Component {
                     <Image style={{resizeMode: 'contain'}} source={require('../assets/images/okSize.png')}/>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    title ="取消"
+                    title="取消"
                     onPress={() => {this.setResetModalVisible(!this.state.resetModalVisible)}}>
                     <Image style={{resizeMode: 'contain'}} source={require('../assets/images/cancelSize.png')}/>
                   </TouchableOpacity>
@@ -328,7 +343,6 @@ const styles = StyleSheet.create({
   hajeh: {
     resizeMode: 'contain',
     width: Dimensions.get('window').width * 0.7,
-    //marginVertical: Dimensions.get('window').width * 0.05,
   },
   iosTextFieldUnderline : {
     borderBottomColor: '#000000',

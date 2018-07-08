@@ -6,7 +6,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, ListView, Dimensions } from 'react-native';
 
 
-export default class SharedDeviceModeScreen extends React.Component {
+export default class TransactionScreen extends React.Component {
   static navigationOptions = {
     title: '出銃記錄',
   }

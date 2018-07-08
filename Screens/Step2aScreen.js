@@ -8,12 +8,16 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 export default class Step2aScreen extends React.Component {
   static navigationOptions = {
-    title: '出銃(2A)',
+    title: '自摸(2A)',
   }
 
   constructor(props) {
     super(props);
 
+  }
+
+  filterLosers(players, id) {
+    return players.filter((player) => player.id != id).map((player) => player.id)
   }
 
   render() {
@@ -23,7 +27,7 @@ export default class Step2aScreen extends React.Component {
       <View style={styles.center}>
         <Image style={{resizeMode: 'contain', marginBottom: 20}} source={require('../assets/images/whowinSize.png')}/>
         {players.map((player, id) => (<TouchableOpacity key={id} value={player.id} style={{marginVertical: 5}}
-                                              onPress={() => navigation.navigate('Step3a', {transaction: {mode: 0, winner: player.id}})}>
+                                              onPress={() => navigation.navigate('Step3a', {transaction: {mode: 0, winners: [player.id], losers: this.filterLosers(players, player.id)}})}>
                              <Text style={styles.text}>{player.name}</Text>
         </TouchableOpacity>))}
       </View>

@@ -26,7 +26,7 @@ export default class AboutScreen extends React.Component {
 
     return (
       <View>
-        <Text>Version 0.1</Text>
+        <Text>Version 0.2</Text>
         <Text>不設一炮雙響，接受三人麻雀玩法</Text>
         <Text>Hajeh Productions 2018. All Rights Reserved</Text>
       </View>

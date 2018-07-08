@@ -9,7 +9,7 @@ const uuidv4 = require('uuid/v4');
 
 export default class Step3bScreen extends React.Component {
   static navigationOptions = {
-    title: 'Step 3b',
+    title: '出銃 (3b) ',
   }
 
   constructor(props) {
@@ -25,7 +25,6 @@ export default class Step3bScreen extends React.Component {
     }
   }
 
-
   componentDidMount() {
     this.setState({transID: uuidv4()})
   }
@@ -39,12 +38,13 @@ export default class Step3bScreen extends React.Component {
   }
 
   setWinner(id, type) {
-    type == 1? this.setState({winner1: id}):  this.setState({winner2: id})
+    type == 1? this.setState({winner1: id}): this.setState({winner2: id})
   }
 
   render() {
     const {navigation} = this.props;
     const transaction = navigation.getParam('transaction')
+    const players = transaction.players.filter((player) => player.id != transaction.loser)
     return (
       <View style={styles.center}>
         <View>
@@ -52,7 +52,7 @@ export default class Step3bScreen extends React.Component {
           <Picker selectedValue={this.state.winner1}
                   style={Platform.OS == 'ios'? styles.iosPicker: styles.androidPicker}
                   onValueChange={(itemValue, itemIndex) => this.setState({winner1: itemValue})}>
-          {transaction.players.map((player ,id) => <Picker.Item key={id} label={player.name} value={player.id} onPress={() => this.setWinner(player.id, 1)}/>)}
+          {players.map((player ,id) => <Picker.Item key={id} label={player.name} value={player.id} onPress={() => this.setWinner(player.id, 1)}/>)}
           </Picker>
         </View>
         <View style={Platform.OS === 'ios'? {marginTop: 150}: {marginTop: 50}}>
@@ -106,8 +106,8 @@ export default class Step3bScreen extends React.Component {
             {transaction : {...transaction,
               twoWinners: this.state.twoWinners,
               transID: this.state.transID,
-              winner: [this.state.winner1, this.state.winner2],
-              score: [this.state.score1, this.state.score2]}})}>
+              winners: [this.state.winner1], //, this.state.winner2],
+              score: this.state.score1 }})}> // there was this.state.score2 in an array too
             <Image source={require('../assets/images/saveSize.png')}/>
           </TouchableOpacity>
         </View>

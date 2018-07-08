@@ -8,7 +8,7 @@ const uuidv4 = require('uuid/v4');
 
 export default class Step3aScreen extends React.Component {
   static navigationOptions = {
-    title: 'Step 3a',
+    title: '自摸 (3a)',
   }
 
   constructor(props) {
@@ -24,7 +24,6 @@ export default class Step3aScreen extends React.Component {
   componentDidMount() {
     this.setState({transID: uuidv4()})
   }
-
 
   render() {
     const {navigation} = this.props;
