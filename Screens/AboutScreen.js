@@ -1,10 +1,6 @@
 /**
  * Created by MercedesLo on 2018-06-29.
  */
-/**
- * Created by MercedesLo on 2018-06-02.
- */
-
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 

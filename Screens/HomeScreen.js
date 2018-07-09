@@ -23,9 +23,9 @@ export default class HomeScreen extends React.Component {
       editPlayerModalVisible: false,
       settingsModalVisible: false,
       stats: [{name: 'Roberto', score: 0, pay: 0, id: uuid(), active: true, deleted: false},
-              {name: 'Virginia', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
-              {name: 'Player 3', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
-              {name: 'Player 4', score: 0, pay: 0, id: uuid(), active: true, deleted: false}],
+              {name: 'Jinja', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
+              {name: 'Hajeh', score: 0, pay: 0, id: uuid(), active: true, deleted: false },
+              {name: 'Raymond', score: 0, pay: 0, id: uuid(), active: true, deleted: false}],
       transactions : [],
       newPlayerName : 'New Player'
     }
@@ -329,6 +329,7 @@ const styles = StyleSheet.create({
   },
   text:{
     color: '#29AB87',
+    fontSize: 20,
     fontFamily: 'HanWangYanKai'
   },
   row: {

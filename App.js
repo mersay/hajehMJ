@@ -13,6 +13,7 @@ import Step3aScreen from './Screens/Step3aScreen'
 import Step3bScreen from './Screens/Step3bScreen'
 import AboutScreen from './Screens/AboutScreen'
 import RecordScreen from './Screens/RecordScreen'
+import PlayerScreen from './Screens/PlayerScreen'
 
 const RootStack = createStackNavigator(
   {
@@ -27,6 +28,7 @@ const RootStack = createStackNavigator(
     Step3b: Step3bScreen,
     About: AboutScreen,
     Record: RecordScreen,
+    Player: PlayerScreen,
   },
   {
     initialRouteName: 'Home',

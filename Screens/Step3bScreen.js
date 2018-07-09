@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { StyleSheet, Text, View, Platform, ScrollView, Picker, Image, TouchableOpacity } from 'react-native';
 const uuidv4 = require('uuid/v4');
 
@@ -100,13 +99,13 @@ export default class Step3bScreen extends React.Component {
             </View>
           </View>
         }
-        <View style={[styles.row, {marginTop: 180, justifyContent: 'center'}]}>
+        <View style={[styles.row, {marginTop: Platform.os == 'ios'? 180 : 40, justifyContent: 'center'}]}>
           <TouchableOpacity onPress={() => navigation.navigate('Home',
             {transaction : {...transaction,
               //twoWinners: this.state.twoWinners,
               transID: this.state.transID,
               winners: [this.state.winner1], //, this.state.winner2],
-              score: this.state.score1 }})}> // there was this.state.score2 in an array too
+              score: this.state.score1 }})}>
             <Image source={require('../assets/images/saveSize.png')}/>
           </TouchableOpacity>
         </View>

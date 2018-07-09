@@ -45,6 +45,7 @@ export default class Step0Screen extends React.Component {
     const {navigation} = this.props;
     return (
       <View style={styles.center, styles.background}>
+        <Text>Who is playing?</Text>
         {this.state.players.map((player, id) => (
           <CheckBox key={id} style={{flex: 1, padding: 10}} onPress={() => this.checkPlayer(player)} checked={player.active} title={player.name} />))}
         <TouchableOpacity style={styles.button} onPress={() => this.submitCheck(navigation)}>

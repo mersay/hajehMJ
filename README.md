@@ -11,3 +11,5 @@ features under development
 - UI improvements (pixels on pictures)
 - app icon
 - clean up styles
+- edit player -> navigation with parameters
+  keyboard avoiding view!
